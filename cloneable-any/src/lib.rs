@@ -54,3 +54,38 @@ impl fmt::Debug for (dyn CloneableAnySync) {
 }
 
 impl<T> CloneableAnySync for T where T: 'static + Clone + Send + Sync {}
+
+#[cfg(feature = "std")]
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[derive(Debug, Clone)]
+    struct Wrapper(Box<dyn CloneableAny + Send + Sync>);
+    #[derive(Debug, Clone)]
+    struct WrapperSync(Box<dyn CloneableAnySync>);
+
+    #[derive(Clone)]
+    struct Foo;
+
+    #[test]
+    fn test_debug_and_clone() {
+        let wrapper = Wrapper(Box::new(Foo));
+        println!("{:?}", wrapper);
+        #[allow(clippy::redundant_clone)]
+        let _ = wrapper.clone();
+
+        let wrapper = WrapperSync(Box::new(Foo));
+        println!("{:?}", wrapper);
+        #[allow(clippy::redundant_clone)]
+        let _ = wrapper.clone();
+    }
+
+    #[test]
+    fn test_downcast() {
+        assert!((Wrapper(Box::new(Foo)).0 as Box<dyn CloneableAny>)
+            .downcast_ref::<Foo>()
+            .is_some());
+        assert!((Wrapper(Box::new(Foo)).0 as Box<dyn CloneableAny>).is::<Foo>());
+    }
+}
