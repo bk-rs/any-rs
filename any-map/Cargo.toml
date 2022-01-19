@@ -12,4 +12,12 @@ keywords = []
 categories = []
 readme = "README.md"
 
+[package.metadata.docs.rs]
+all-features = true
+
+[features]
+default = ["cloneable-any", "fnv"]
+
 [dependencies]
+cloneable-any = { version = "0.0", default-features = false, features = ["std"], optional = true, path = "../cloneable-any" }
+fnv = { version = "1.0", default-features = false, features = ["std"], optional = true }

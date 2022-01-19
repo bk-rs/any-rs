@@ -13,25 +13,19 @@ pub trait CloneableAny: Downcast + DynClone {}
 impl_downcast!(CloneableAny);
 clone_trait_object!(CloneableAny);
 
-impl fmt::Debug for (dyn CloneableAny) {
+impl fmt::Debug for dyn CloneableAny {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.debug_tuple("CloneableAny")
-            .field(&format_args!("_"))
-            .finish()
+        f.debug_struct("CloneableAny").finish_non_exhaustive()
     }
 }
-impl fmt::Debug for (dyn CloneableAny + Send) {
+impl fmt::Debug for dyn CloneableAny + Send {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.debug_tuple("CloneableAny")
-            .field(&format_args!("_"))
-            .finish()
+        f.debug_struct("CloneableAny").finish_non_exhaustive()
     }
 }
-impl fmt::Debug for (dyn CloneableAny + Send + Sync) {
+impl fmt::Debug for dyn CloneableAny + Send + Sync {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.debug_tuple("CloneableAny")
-            .field(&format_args!("_"))
-            .finish()
+        f.debug_struct("CloneableAny").finish_non_exhaustive()
     }
 }
 
@@ -45,11 +39,9 @@ pub trait CloneableAnySync: DowncastSync + DynClone {}
 impl_downcast!(CloneableAnySync);
 clone_trait_object!(CloneableAnySync);
 
-impl fmt::Debug for (dyn CloneableAnySync) {
+impl fmt::Debug for dyn CloneableAnySync {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.debug_tuple("CloneableAnySync")
-            .field(&format_args!("_"))
-            .finish()
+        f.debug_struct("CloneableAnySync").finish_non_exhaustive()
     }
 }
 
