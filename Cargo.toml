@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "any-map",
+    "cloneable-any",
+]

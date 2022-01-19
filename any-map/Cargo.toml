@@ -1,0 +1,15 @@
+[package]
+name = "any-map"
+version = "0.0.0"
+authors = ["vkill <vkill.net@gmail.com>"]
+edition = "2021"
+description = "Any Map"
+license = "Apache-2.0 OR MIT"
+repository = "https://github.com/bk-rs/any-rs"
+homepage = "https://github.com/bk-rs/any-rs"
+documentation = "https://docs.rs/any-map"
+keywords = []
+categories = []
+readme = "README.md"
+
+[dependencies]
