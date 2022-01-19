@@ -8,7 +8,12 @@ use std::collections::HashMap;
 #[cfg(feature = "cloneable-any")]
 use cloneable_any::CloneableAny;
 
+pub mod extensions;
 pub mod hasher;
+
+#[cfg(feature = "cloneable-any")]
+pub use extensions::{CloneableExtensions, CloneableExtensionsSync};
+pub use extensions::{Extensions, ExtensionsSync};
 
 use self::hasher::Hasher;
 
